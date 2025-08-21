@@ -1,0 +1,12 @@
+version: "3"
+services:
+    weather-app:
+        build:
+            context: .
+            args:
+                VITE_WEATHER_API_KEY: ${VITE_WEATHER_API_KEY} # Using an environment variable
+        image: imatanu/weather-app:0.0.1.RELEASE
+        ports:
+            - "3000:80"
+        environment:
+            - VITE_WEATHER_API_KEY=${VITE_WEATHER_API_KEY} # Set at runtime for API requests
