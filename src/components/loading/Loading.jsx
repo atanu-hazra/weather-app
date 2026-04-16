@@ -2,12 +2,20 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div className="flex flex-col p-20 items-center justify-center h-1/2 bg-transparent">
-            <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-white opacity-75 animate-pulse"></div>
-                <div className="absolute top-0 left-0 w-12 h-12 rounded-full bg-white opacity-50 animate-ping"></div>
+        <div className="flex flex-col items-center justify-center py-24 animate-fade-in">
+            <div className="relative flex items-center justify-center">
+                {/* Outer pulsing ring */}
+                <div className="absolute w-16 h-16 rounded-full border border-emerald-400/20 loading-ring"></div>
+                {/* Middle ring */}
+                <div className="absolute w-12 h-12 rounded-full border border-cyan-400/15 loading-ring" style={{ animationDelay: '0.4s' }}></div>
+                {/* Center dot */}
+                <div className="w-4 h-4 rounded-full loading-dot" style={{
+                    background: 'linear-gradient(135deg, #6ee7b7, #67e8f9)'
+                }}></div>
             </div>
-            <div className="mt-6 text-lg text-white">Loading...</div>
+            <p className="mt-8 text-sm text-white/40 font-light tracking-widest uppercase">
+                Loading
+            </p>
         </div>
     );
 };
