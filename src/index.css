@@ -1,33 +1,372 @@
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-body {
-    font-family: "Poppins", "Montserrat", sans-serif;
-    font-weight: 100;
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-hover: rgba(255, 255, 255, 0.1);
+    --text-primary: #f0f6fc;
+    --text-secondary: rgba(201, 220, 238, 0.78);
+    --text-muted: rgba(157, 189, 214, 0.6);
+    --accent-primary: #6ee7b7;
+    --accent-secondary: #67e8f9;
+    --accent-gradient: linear-gradient(135deg, #6ee7b7, #67e8f9);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    --card-shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.28);
 }
 
-/* Custom scrollbar styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
+    transition: background-image 0.8s ease, background-color 0.8s ease;
+}
+
+/* ========== Typography Utilities ========== */
+.font-display {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+}
+
+.font-mono {
+    font-family: "JetBrains Mono", monospace;
+}
+
+/* ========== Glass Card System ========== */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--card-shadow);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    background: var(--glass-hover);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+.glass-card-static {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--card-shadow);
+}
+
+/* ========== Accent Gradient Text ========== */
+.gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========== Buttons ========== */
+.btn-primary {
+    background: linear-gradient(135deg, rgba(110, 231, 183, 0.85), rgba(103, 232, 249, 0.85));
+    color: #0f172a;
+    font-weight: 600;
+    border-radius: 9999px;
+    padding: 0.625rem 1.75rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(110, 231, 183, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(110, 231, 183, 0.35);
+    filter: brightness(1.08);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    font-weight: 500;
+    border-radius: 9999px;
+    padding: 0.625rem 1.75rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* ========== Search Input ========== */
+.search-input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 0.65rem 1.25rem;
+    color: var(--text-primary);
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    width: 22rem;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: rgba(201, 220, 238, 0.4);
+    font-weight: 300;
+}
+
+.search-input:focus {
+    border-color: rgba(110, 231, 183, 0.5);
+    box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== Weather Stats Row ========== */
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.2s ease;
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.stat-icon img {
+    width: 1.125rem;
+    height: 1.125rem;
+    opacity: 0.85;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    min-width: fit-content;
+}
+
+.stat-value {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.875rem;
+    font-family: "JetBrains Mono", "Inter", monospace;
+}
+
+/* ========== Custom Scrollbar ========== */
 .scroll-container::-webkit-scrollbar {
-    height: 10px;
-  }
-  
-  .scroll-container::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    border-radius: 20px;
-  }
-  
-  .scroll-container::-webkit-scrollbar-thumb {
-    background: #0e7c74;
-    border-radius: 20px;
-  }
-  
-  .scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #378b8e; 
-  }
-  
-  
+    height: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 99px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(110, 231, 183, 0.4), rgba(103, 232, 249, 0.4));
+    border-radius: 99px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(110, 231, 183, 0.6), rgba(103, 232, 249, 0.6));
+}
+
+/* ========== Loading Animation ========== */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.2;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+}
+
+.loading-dot {
+    animation: float 2s ease-in-out infinite;
+}
+
+.loading-ring {
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* ========== Nav Link Underline Effect ========== */
+.nav-link {
+    position: relative;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 70%;
+    height: 2px;
+    background: var(--accent-gradient);
+    border-radius: 99px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after,
+.nav-link-active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.nav-link-active {
+    color: #6ee7b7 !important;
+}
+
+/* ========== Temperature Display ========== */
+.temp-display {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+/* ========== Fade-in Animation ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ========== Suggestion Dropdown ========== */
+.suggestion-item {
+    padding: 0.5rem 0.875rem;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.suggestion-item:hover {
+    background: rgba(110, 231, 183, 0.12);
+    color: var(--text-primary);
+    padding-left: 1rem;
+}
+
+/* ========== Footer Link Hover ========== */
+.footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    background: rgba(110, 231, 183, 0.12);
+    border-color: rgba(110, 231, 183, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(110, 231, 183, 0.15);
+}
+
+.footer-link img {
+    width: 1.125rem;
+    height: 1.125rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.footer-link:hover img {
+    opacity: 1;
+}

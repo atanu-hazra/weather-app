@@ -10,22 +10,23 @@ function Header() {
     isday = Boolean(currentWeatherData.current.is_day)
   }
 
-  const title = isday ? 'Weather Updates 🌥️' : 'Weather Updates 🌙';
+  const emoji = isday ? '☀️' : '🌙';
 
   return (
-    <header className=' lg:mx-5 mt-3 mb-5 p-1 md:p-3 lg:p-5 rounded-md shadow-lg'>
-      <nav className='flex flex-col md:flex-row justify-between items-center'>
-        <h1 className='w-full md:w-auto flex justify-center md:justify-start items-center mb-4 md:mb-0'>
-          <Link to="/" className='text-3xl md:text-4xl font-extrabold md:font-semibold text-center'>
-            {title}
+    <header className='glass-card-static lg:mx-5 mt-4 mb-6 px-4 py-3 md:px-6 md:py-4'>
+      <nav className='flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0'>
+        <h1 className='flex items-center gap-3'>
+          <Link to="/" className='font-display text-2xl md:text-3xl font-bold tracking-tight text-white hover:opacity-90 transition-opacity duration-200'>
+            Weather
+            <span className='gradient-text'> Updates</span>
+            <span className='ml-2 text-2xl'>{emoji}</span>
           </Link>
         </h1>
-        <div className='flex flex-row justify-center items-center gap-6 md:gap-2'>
+        <div className='flex items-center gap-1'>
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `text-lg md:text-lg font-semibold py-2 px-3 md:py-2 md:px-4 transition duration-200 hover:bg-transparent border-0 hover:text-lime-500 rounded-md
-              ${isActive ? "text-lime-300" : "text-slate-100"}`
+              `nav-link ${isActive ? "nav-link-active text-emerald-300" : "text-slate-200 hover:text-white"}`
             }
           >
             Home
@@ -33,12 +34,10 @@ function Header() {
           <NavLink
             to="/compare"
             className={({ isActive }) =>
-              `text-lg md:text-lg font-semibold py-2 px-3 md:py-2 md:px-4 transition duration-200  
-               hover:bg-transparent border-0 hover:text-lime-500 rounded-md 
-              ${isActive ? "text-lime-300" : "text-slate-100"}`
+              `nav-link ${isActive ? "nav-link-active text-emerald-300" : "text-slate-200 hover:text-white"}`
             }
           >
-            Multi-location Mood
+            Compare
           </NavLink>
         </div>
       </nav>
